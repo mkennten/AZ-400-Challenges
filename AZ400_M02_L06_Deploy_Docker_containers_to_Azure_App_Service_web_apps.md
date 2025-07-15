@@ -27,24 +27,6 @@ After completing this challenge, you will be able to:
 - [ ] Azure Container Registry contains the **eshoponweb/web** repository with **latest** tag
 - [ ] All Azure resources are properly configured and communicating
 
-## Critical Requirements ⚠️
-
-**MANDATORY**: These exact values must be used for system compatibility:
-
-- **Azure DevOps Project Name**: `eShopOnWeb` - Required for pipeline references
-- **Work Item Process**: `Scrum` - Required for project configuration
-- **Repository Source**: `https://github.com/MicrosoftLearning/eShopOnWeb.git` - Required for source code
-- **Default Branch**: `main` - Required for pipeline execution
-- **CI Pipeline File**: `/.ado/eshoponweb-ci-docker.yml` - Required for CI configuration
-- **CD Pipeline File**: `/.ado/eshoponweb-cd-webapp-docker.yml` - Required for CD configuration
-- **CI Pipeline Name**: `eshoponweb-ci-docker` - Required for identification
-- **CD Pipeline Name**: `eshoponweb-cd-webapp-docker` - Required for identification
-- **Resource Group**: `AZ400-RG1` (or your service connection resource group) - Required for resource organization
-- **Container Repository**: `eshoponweb/web` - Required for container registry
-- **Docker Image Reference**: `${acr.properties.loginServer}/eshoponweb/web:latest` - Required for App Service configuration
-- **Bicep Templates**: `/infra/webapp-docker.bicep` and `/infra/webapp-to-acr-roleassignment.bicep` - Required for infrastructure
-- **Role Assignment**: `AcrPull` - Required for container access
-
 ## Prerequisites
 
 - Microsoft Edge or Azure DevOps supported browser
@@ -56,9 +38,15 @@ After completing this challenge, you will be able to:
 
 You're tasked with implementing a complete CI/CD pipeline for a containerized .NET application. Here's what you need to accomplish:
 
-### Phase 1: Environment Setup
+### Phase 1: Azure DevOps project Setup
 
 Set up or make sure you have the eShopOnWeb project and repository. Make sure to configure the main branch as the default branch.
+
+**MANDATORY**: These exact values must be used for system compatibility:
+- **Azure DevOps Project Name**: `eShopOnWeb` - On Cloudslice a random number suffix is added to the project name, please use that one
+- **Repository Source**: `https://github.com/MicrosoftLearning/eShopOnWeb.git` - Required for source code, should be already imported as `eShopOnWeb`
+- **Default Branch**: `main` - Required for pipeline execution
+- **Work Item Process**: `Scrum` - Required for project configuration
 
 ### Phase 2: CI Pipeline Implementation
 
@@ -69,6 +57,16 @@ Create a CI pipeline that:
 - Pushes the built image to Azure Container Registry with appropriate tags
 - Handles Azure service connection permissions properly
 
+You can use the template `/.ado/eshoponweb-ci-docker.yml`.
+
+**MANDATORY**: These exact values must be used for system compatibility:
+
+- **Resource Group**: `AZ400-RG1` (or your service connection resource group) - Required for resource organization
+- **Container Repository**: `eshoponweb/web` - Required for container registry
+- **Docker Image Reference**: `${acr.properties.loginServer}/eshoponweb/web:latest` - Required for App Service configuration
+- **Bicep Templates**: `/infra/webapp-docker.bicep` and `/infra/webapp-to-acr-roleassignment.bicep` - Required for infrastructure
+- **Role Assignment**: `AcrPull` - Required for container access
+
 ### Phase 3: CD Pipeline Implementation
 
 Create a CD pipeline that:
@@ -77,6 +75,8 @@ Create a CD pipeline that:
 - Configures proper role assignments for container access
 - Deploys the containerized application to Azure App Service
 - Ensures the web app can pull images from the container registry
+
+You can use the template `/.ado/eshoponweb-cd-webapp-docker.yml`
 
 ### Phase 4: Validation
 
