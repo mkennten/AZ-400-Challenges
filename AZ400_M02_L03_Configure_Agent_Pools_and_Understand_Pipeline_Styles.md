@@ -27,36 +27,33 @@ After completing this challenge, you will be able to:
 - [ ] YAML pipeline is modified to use the self-hosted agent pool
 - [ ] Pipeline runs successfully on the self-hosted agent and produces artifacts
 
-## Critical Requirements ⚠️
-
-**MANDATORY**: These exact values must be used for system compatibility:
-
-- **Azure DevOps Project Name**: `eShopOnWeb` - Required for pipeline references
-- **Repository Source**: `https://github.com/MicrosoftLearning/eShopOnWeb.git` - Required for source code
-- **Default Branch**: `main` - Required for pipeline execution
-- **Resource Group**: `rg-eshoponweb-agentpool` - Required for resource organization
-- **Agent Pool Name**: `eShopOnWebSelfPool` - Required for pipeline configuration
-- **Agent Name**: `eShopOnWebSelfAgent` - Required for pipeline demands
-- **VM name**: `eshoponweb-vm` - Required for Cloudslice
-- **VM region**: `eastus2` - when using Cloudslice, you need to use this region
-- **VM size**: `Standard D2s_v3` - when using Cloudslice, you need to use this size
-- **VM Image**: `Windows Server 2022 Datacenter: Azure Edition - x64 Gen2` - Required for agent compatibility
-- **VM security type**: `Trusted launch virtual machines` - when using Cloudslice, you need to use this type
-- **VM Availability options**: `No infrastructure redundancy required` - when using Cloudslice, you need to use this option
-- **PAT Token Name**: `eShopOnWebToken` - Required for authentication
-- **PAT Scope**: `Agent Pools (Read & Manage)` - Required for minimal permissions
-- **Service Context**: `NT AUTHORITY\SYSTEM` - Required for service security
-- **YAML Pipeline File**: `/.ado/eshoponweb-ci-pr.yml` - Required for CI configuration
-- **Pool Configuration**: Must include `name: eShopOnWebSelfPool` and `demands: Agent.Name -equals eShopOnWebSelfAgent`
-- **Grant Access Option**: Must be **unchecked** - Required for security compliance
-
 ## Your Challenge
 
 You're tasked with setting up a complete self-hosted agent infrastructure for Azure DevOps pipelines. Here's what you need to accomplish:
 
-### Phase 1: Infrastructure Setup
+### Phase 1: Azure DevOps project Setup
 
-Deploy an Azure VM with the correct specifications (Presets - Dev/Test) including system-assigned managed identity. To support pipeline operations, use the following PowerShell script to install the required prerequisites (Azure CLI and .NET 8.0 SDK) on the VM:
+Use the eShopOnWeb project and repo for this lab.
+
+**MANDATORY**: These exact values must be used for system compatibility:
+- **Azure DevOps Project Name**: `eShopOnWeb` - On Cloudslice a random number suffix is added to the project name, please use that one
+- **Repository Source**: `https://github.com/MicrosoftLearning/eShopOnWeb.git` - Required for source code, should be already imported as `eShopOnWeb`
+- **Default Branch**: `main` - Required for pipeline execution
+
+### Phase 2: Infrastructure Setup
+
+Deploy an Azure VM with the correct specifications (Presets - Dev/Test) including system-assigned managed identity.
+
+**MANDATORY**: These exact values must be used for system compatibility on Cloudslice, when using your own subscription feel free to change the values:
+- **Resource Group**: `rg-eshoponweb-agentpool` - Required for resource organization
+- **VM name**: `eshoponweb-vm` - Required for Cloudslice
+- **VM region**: `<check the value in the detailed instructions>` - On Cloudslice, different regions might be used in each instanc 
+- **VM size**: `Standard D2s_v3` - Required for Cloudslice
+- **VM Image**: `Windows Server 2022 Datacenter: Azure Edition - x64 Gen2` - Required for Cloudslice
+- **VM security type**: `Trusted launch virtual machines` - Required for Cloudslice
+- **VM Availability options**: `No infrastructure redundancy required` - Required for Cloudslice
+
+To support pipeline operations, use the following PowerShell script to install the required prerequisites (Azure CLI and .NET 8.0 SDK) on the VM:
 
 ```powershell
 # Use choco to install other tools
@@ -70,15 +67,27 @@ choco install dotnet-sdk --version=8.0.403 -y
 choco install azure-cli -y
 ```
 
-### Phase 2: Agent Pool Configuration
+### Phase 3: Agent Pool Configuration
 
 Create a self-hosted agent pool in Azure DevOps with proper security settings. Download and configure the agent software on your VM using a Personal Access Token with minimal required permissions.
 
-### Phase 3: Pipeline Modification
+**MANDATORY**: These exact values must be used for system compatibility on Cloudslice
+- **Agent Pool Name**: `eShopOnWebSelfPool` - Add the random number suffix of the project name, e.g. `eShopOnWebSelfPool`, Required for Cloudslice
+- **Agent Name**: `eShopOnWebSelfAgent` - Required for pipeline demands
+- **PAT Token Name**: `eShopOnWebToken` - Required for authentication
+- **PAT Scope**: `Agent Pools (Read & Manage)` - Required for minimal permissions
+- **Service Context**: `NT AUTHORITY\SYSTEM` - Required for service security
+  
+### Phase 4: Pipeline Modification
 
 Take the existing YAML pipeline and modify it to run on your self-hosted agent instead of Microsoft-hosted agents. The pipeline should successfully build, test, and publish the .NET application.
 
-### Phase 4: Validation
+**MANDATORY**: These exact values must be used for system compatibility
+- **YAML Pipeline File**: `/.ado/eshoponweb-ci-pr.yml` - Required for CI configuration
+- **Pool Configuration**: Must include `name: eShopOnWebSelfPool` and `demands: Agent.Name -equals eShopOnWebSelfAgent` - make sure to adjust the correct agent pool name (adding suffix)
+- **Grant Access Option**: Must be **unchecked** - Required for security compliance
+
+### Phase 5: Validation
 
 Ensure your pipeline runs successfully on the self-hosted agent and produces the expected build artifacts.
 
