@@ -14,8 +14,8 @@ Challenge labs provide:
 
 | Challenge | Focus Area | Difficulty | Time |
 |-----------|------------|------------|------|
-| [Configure Agent Pools](Instructions/Challenges/AZ400_M02_L03_Configure_Agent_Pools_and_Understand_Pipeline_Styles.md) | Self-hosted Agents & YAML Pipelines | Intermediate | 30 min |
-| [Deploy Docker Containers](Instructions/Challenges/AZ400_M02_L06_Deploy_Docker_containers_to_Azure_App_Service_web_apps.md) | Container CI/CD & Azure App Service | Intermediate | 20 min |
+| [Configure Agent Pools](AZ400_M02_L03_Configure_Agent_Pools_and_Understand_Pipeline_Styles.md) | Self-hosted Agents & YAML Pipelines | Intermediate | 30 min |
+| [Deploy Docker Containers](AZ400_M02_L06_Deploy_Docker_containers_to_Azure_App_Service_web_apps.md) | Container CI/CD & Azure App Service | Intermediate | 20 min |
 
 ## 🚀 How to Use
 
