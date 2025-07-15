@@ -39,7 +39,10 @@ After completing this challenge, you will be able to:
 - **Agent Name**: `eShopOnWebSelfAgent` - Required for pipeline demands
 - **VM name**: `eshoponweb-vm` - Required for Cloudslice
 - **VM region**: `eastus2` - when using Cloudslice, you need to use this region
+- **VM size**: `Standard D2s_v3` - when using Cloudslice, you need to use this size
 - **VM Image**: `Windows Server 2022 Datacenter: Azure Edition - x64 Gen2` - Required for agent compatibility
+- **VM security type**: `Trusted launch virtual machines` - when using Cloudslice, you need to use this type
+- **VM Availability options**: `No infrastructure redundancy required` - when using Cloudslice, you need to use this option
 - **PAT Token Name**: `eShopOnWebToken` - Required for authentication
 - **PAT Scope**: `Agent Pools (Read & Manage)` - Required for minimal permissions
 - **Service Context**: `NT AUTHORITY\SYSTEM` - Required for service security
