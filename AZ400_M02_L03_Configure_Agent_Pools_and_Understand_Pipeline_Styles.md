@@ -33,7 +33,7 @@ You're tasked with setting up a complete self-hosted agent infrastructure for Az
 
 ### Phase 1: Azure DevOps project Setup
 
-Use the eShopOnWeb project and repo for this lab.
+Use the eShopOnWeb project and repository. Configure the main branch as the default and ensure the project structure is ready for pipeline implementation.
 
 **MANDATORY**: These exact values must be used for system compatibility:
 - **Azure DevOps Project Name**: `eShopOnWeb` - On Cloudslice a random number suffix is added to the project name, please use that one
