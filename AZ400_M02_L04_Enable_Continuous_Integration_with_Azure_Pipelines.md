@@ -18,34 +18,6 @@ Configure a complete CI/CD workflow using Azure DevOps pipelines with pull reque
 - [ ] Build artifacts are published and available for deployment
 - [ ] Branch policies protect the main branch from direct commits
 
-## Critical Requirements ⚠️
-
-**MANDATORY**: These exact values must be used for system compatibility:
-
-- **Project Name**: `eShopOnWeb` - Required for automated grading
-- **Repository URL**: `https://github.com/MicrosoftLearning/eShopOnWeb.git` - Contains required project structure
-- **Default Branch**: `main` - Must be set as default branch
-- **PR Pipeline File**: `/.ado/eshoponweb-ci-pr.yml` - Specific path for pull request validation
-- **CI Pipeline File**: `/.ado/eshoponweb-ci.yml` - Specific path for continuous integration
-- **Pipeline Names**:
-  - `eshoponweb-ci-pr` - For pull request validation
-  - `eshoponweb-ci` - For continuous integration
-- **Test Branch Names**: `Feature01` and `Feature02` - For validation testing
-- **Minimum Reviewers**: `1` - Required for branch policy
-- **Allow Requestors to Approve**: Must be checked (single user environment)
-- **Trigger Configuration**:
-  ```yaml
-  trigger:
-    branches:
-      include:
-        - main
-    paths:
-      include:
-        - src/web/*
-  ```
-- **Test File Path**: `/eShopOnWeb/src/Web/Program.cs` - For testing PR workflow
-- **Test Code Comment**: `// Testing my PR` - Exact comment to add/remove
-
 ## Prerequisites
 
 - Basic understanding of YAML and branching workflows
@@ -54,9 +26,14 @@ Configure a complete CI/CD workflow using Azure DevOps pipelines with pull reque
 
 You need to transform a basic repository into a production-ready development environment with proper CI/CD practices. Here's what you must accomplish:
 
-### Phase 1: Foundation Setup
+### Phase 1: Azure DevOps project Setup
 
 Use the eShopOnWeb project and repository. Configure the main branch as the default and ensure the project structure is ready for pipeline implementation.
+
+**MANDATORY**: These exact values must be used for system compatibility:
+- **Azure DevOps Project Name**: `eShopOnWeb` - On Cloudslice a random number suffix is added to the project name, please use that one
+- **Repository Source**: `https://github.com/MicrosoftLearning/eShopOnWeb.git` - Required for source code, should be already imported as `eShopOnWeb`
+- **Default Branch**: `main` - Required for pipeline execution
 
 ### Phase 2: Pull Request Validation
 
@@ -64,7 +41,7 @@ Implement a system where no code can be directly committed to the main branch. A
 
 **Key Components:**
 
-- Import and configure the PR validation pipeline
+- Import and configure the PR validation pipeline `/.ado/eshoponweb-ci-pr.yml`
 - Set up branch policies with minimum reviewer requirements
 - Configure build validation using the imported pipeline
 
@@ -74,8 +51,18 @@ Set up an automated build system that triggers whenever changes are made to the 
 
 **Key Components:**
 
-- Import and configure the CI pipeline
+- Import and configure the CI pipeline `/.ado/eshoponweb-ci.yml`
 - Enable automatic triggers for main branch changes
+    - **Trigger Configuration**:
+    ```yaml
+    trigger:
+      branches:
+        include:
+          - main
+      paths:
+        include:
+          - src/web/*
+    ```
 - Ensure proper artifact publishing (Website and Bicep)
 
 ### Phase 4: Testing and Validation
@@ -84,7 +71,7 @@ Prove your implementation works by creating test branches, making code changes, 
 
 **Test Scenarios:**
 
-- Create feature branches and test PR validation
+- Create feature branches and test PR validation (**Test Branch Names**: `Feature01` and `Feature02`)
 - Verify build triggers work correctly
 - Confirm artifacts are published successfully
 
