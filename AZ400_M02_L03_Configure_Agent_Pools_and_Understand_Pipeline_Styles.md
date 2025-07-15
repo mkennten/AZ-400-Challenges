@@ -37,6 +37,7 @@ After completing this challenge, you will be able to:
 - **Resource Group**: `rg-eshoponweb-agentpool` - Required for resource organization
 - **Agent Pool Name**: `eShopOnWebSelfPool` - Required for pipeline configuration
 - **Agent Name**: `eShopOnWebSelfAgent` - Required for pipeline demands
+- **VM region**: 'eastus2' - when using Cloudslice, you need to use this region
 - **VM Image**: `Windows Server 2022 Datacenter: Azure Edition - x64 Gen2` - Required for agent compatibility
 - **PAT Token Name**: `eShopOnWebToken` - Required for authentication
 - **PAT Scope**: `Agent Pools (Read & Manage)` - Required for minimal permissions
